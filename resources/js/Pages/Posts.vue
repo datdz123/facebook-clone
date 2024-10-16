@@ -29,7 +29,7 @@ const user = usePage().props.auth.user
             <div class="grid grid-rows-3 grid-flow-col w-full max-w-[1600px] mt-[56px] h-[calc(100%-56px)] mx-auto px-4">
                 <div id="LeftSection" class="xl:w-[345px] lg:block hidden">
                     <div class="pt-4 max-w-[320px] pr-4">
-                        <Link :href="route('user.show', { id: user.id })" class="flex items-center justify-start w-full cursor-pointer hover:bg-[#E5E6E9] p-2 rounded-md">
+                        <Link :href="route('user.show', { user: user.username })" class="flex items-center justify-start w-full cursor-pointer hover:bg-[#E5E6E9] p-2 rounded-md">
                             <img class="rounded-full ml-1 min-w-[38px] max-h-[38px]" :src="user.image">
                             <div class="text-[15px] text-gray-800 font-extrabold pl-3">{{ user.name }}</div>
                         </Link>

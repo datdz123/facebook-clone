@@ -27,7 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');
     Route::delete('/comment/{id}', [CommentController::class, 'destroy'])->name('comment.destroy');
 
-    Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
+    Route::get('/user/{user:username}', [UserController::class, 'show'])->name('user.show');
     Route::post('/user/update-image', [UserController::class, 'updateImage'])->name('user.updateImage');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
