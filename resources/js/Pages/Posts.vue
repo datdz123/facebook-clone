@@ -93,6 +93,7 @@ const user = usePage().props.auth.user
                                 </div>
                             </div>
                         </div>
+                        // Contact
                         <div class="h-[calc(100vh-115px)] overflow-auto pt-2">
                             <div class="flex items-center justify-start cursor-pointer hover:bg-[#E5E6E9] py-2 rounded-md">
                                 <img class="rounded-full ml-1 min-w-[38px] max-h-[38px]" src="https://picsum.photos/id/140/300/320">

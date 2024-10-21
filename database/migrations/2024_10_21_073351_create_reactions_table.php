@@ -13,22 +13,22 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('reactions', function (Blueprint $table) {
             $table->id();
-
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('post_id')->nullable();
+            $table->unsignedBigInteger('comment_id')->nullable();
+            $table->enum('type', ['like', 'love', 'haha', 'wow', 'sad', 'angry']);
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
-            $table->enum('visibility', ['public', 'friends','private'])->default('public');
-            $table ->unsignedBigInteger('shared_post_id')->nullable();
-            $table->foreign('shared_post_id')
-                ->references('id')
+            $table->foreign('post_id')->references('id')
                 ->on('posts')
                 ->onDelete('cascade');
-            $table->text('text');
-            $table->string('image')->nullable();
+            $table->foreign('comment_id')->references('id')
+                ->on('comments')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -40,6 +40,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('reactions');
     }
 };

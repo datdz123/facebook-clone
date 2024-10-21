@@ -12,6 +12,7 @@ const form = useForm({
     email: '',
     password: '',
     password_confirmation: '',
+    phone: '',
     terms: false,
 });
 
@@ -68,6 +69,19 @@ const submit = () => {
                 />
 
                 <InputError class="mt-2" :message="form.errors.email" />
+            </div>
+            <div class="mt-4">
+                <TextInput
+                    id="phone"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.phone"
+                    required
+                    autocomplete="username"
+                    placeholder="Phone Number"
+                />
+
+                <InputError class="mt-2" :message="form.errors.phone" />
             </div>
 
             <div class="mt-4">

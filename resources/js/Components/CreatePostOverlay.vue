@@ -81,8 +81,12 @@ const clearImage = () => {
                                 <div class="font-extrabold">{{ user.name }}</div>
                                 <div class="flex items-center justify-between w-[100px] bg-gray-200 p-0.5 px-2 rounded-lg">
                                     <Earth :size="18"/>
-                                    <span class="font-bold pl-1.5 text-[13px]">Public</span>
-                                    <ChevronDown class="pr-10 pl-1" :size="18"/>
+                                    <select class="font-bold pl-1.5 text-[13px] bg-gray-200 border-0 focus:ring-0">
+                                        <option value="public">Public</option>
+                                        <option value="friend">Friend</option>
+                                        <option value="private">Private</option>
+                                    </select>
+<!--                                    <ChevronDown class="pr-10 pl-1" :size="18"/>-->
                                 </div>
                             </div>
                         </div>
