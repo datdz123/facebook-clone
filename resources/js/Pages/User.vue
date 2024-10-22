@@ -9,11 +9,18 @@ import Pen from 'vue-material-design-icons/Pen.vue'
 
 import { useGeneralStore } from '@/stores/general';
 import { storeToRefs } from 'pinia';
+import AddBio from "@/Pages/Component/AddBio.vue";
+import { ref } from 'vue';
 const useGeneral = useGeneralStore()
 const { isCropperModal, isImageDisplay } = storeToRefs(useGeneral)
 
 defineProps({ posts: Object, user: Object })
+const showBio = ref(false);
 
+const toggleBioModal = () => {
+    showBio.value = !showBio.value;
+};
+console.log("123",showBio.value)
 </script>
 
 <template>
@@ -147,9 +154,10 @@ defineProps({ posts: Object, user: Object })
                     <div class="bg-white p-3 rounded-lg shadow-lg">
                         <div class="font-extrabold pb-2 text-xl">Intro</div>
                         <div class="pb-5">
-                            <button class="w-full bg-gray-200 hover:bg-gray-300 rounded-lg p-2 font-bold">
+                            <button @click="toggleBioModal" class="w-full bg-gray-200 hover:bg-gray-300 rounded-lg p-2 font-bold">
                                 Add bio
                             </button>
+                            <AddBio v-if="showBio" :show="showBio" @close="showBio = false"/>
                         </div>
                         <div class="pb-5">
                             <button class="w-full bg-gray-200 hover:bg-gray-300 rounded-lg p-2 font-bold">
