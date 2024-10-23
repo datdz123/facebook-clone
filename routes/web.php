@@ -28,12 +28,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/comment/{id}', [CommentController::class, 'destroy'])->name('comment.destroy');
 
     Route::get('/user/{user:username}', [UserController::class, 'show'])->name('user.show');
+    Route::get('/user/{user:username}/about', [UserController::class, 'showAbout'])->name('user.about');
+    Route::get('/user/{user:username}/friends', [UserController::class, 'showFriends'])->name('user.friends');
+    Route::get('/user/{user:username}/videos', [UserController::class, 'showVideos'])->name('user.videos');
+    Route::get('/user/{user:username}/photos', [UserController::class, 'showPhotos'])->name('user.photos');
+    Route::get('/user/{user:username}/check-ins', [UserController::class, 'showCheckIns'])->name('user.checkins');
     Route::post('/user/update-image', [UserController::class, 'updateImage'])->name('user.updateImage');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route ::post('addBio',[ProfileController::class,'addBio'])->name('profile.addBio');
+    Route ::post('editBio',[ProfileController::class,'editBio'])->name('profile.editBio');
 });
 
 require __DIR__.'/auth.php';

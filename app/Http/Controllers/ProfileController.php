@@ -90,4 +90,12 @@ class ProfileController extends Controller
         $user->save();
         return Redirect::route('user.show', ['user' => $user->username]);
     }
+    public function editBio(Request $request): RedirectResponse
+    {
+        $user = Auth::user();
+        $user->bio = $request->bio;
+        $user->save();
+        return Redirect::route('user.show', ['user' => $user->username])
+            ->with('success', 'Bio updated successfully');
+    }
 }

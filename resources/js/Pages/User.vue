@@ -11,15 +11,27 @@ import { useGeneralStore } from '@/stores/general';
 import { storeToRefs } from 'pinia';
 import AddBio from "@/Pages/Component/AddBio.vue";
 import { ref } from 'vue';
+import EditBio from "@/Pages/Component/EditBio.vue";
 const useGeneral = useGeneralStore()
 const { isCropperModal, isImageDisplay } = storeToRefs(useGeneral)
 
 defineProps({ posts: Object, user: Object })
-const showBio = ref(false);
-
-const toggleBioModal = () => {
-    showBio.value = !showBio.value;
+const showEditBio = ref(false);
+const showAddBio = ref(false);
+const toggleAddBioModal = () => {
+    showAddBio.value = !showAddBio.value;
+    if (showAddBio.value) {
+        showEditBio.value = false;
+    }
 };
+
+const toggleEditBioModal = () => {
+    showEditBio.value = !showEditBio.value;
+    if (showEditBio.value) {
+        showAddBio.value = false;
+    }
+};
+
 </script>
 
 <template>
@@ -146,7 +158,6 @@ const toggleBioModal = () => {
                     </div>
                 </div>
             </div>
-
             <div class="flex-cols md:flex w-full max-w-[1100px] justify-between h-[calc(100%-56px)] md:px-0 px-2 mx-auto">
 
                 <div id="LeftSection" class="w-full md:w-5/12 mt-4 mr-4">
@@ -155,15 +166,16 @@ const toggleBioModal = () => {
                         <div class="pb-5">
                             <div v-if="user.bio" class="">
                                 <p class="text-center mb-2">{{user.bio}}</p>
-                                <button  @click="toggleBioModal" class="w-full bg-gray-200 hover:bg-gray-300 rounded-lg p-2 font-bold">
+                                <button  @click="toggleEditBioModal" class="w-full bg-gray-200 hover:bg-gray-300 rounded-lg p-2 font-bold">
                                     Chỉnh sửa
                                 </button>
+                                <EditBio v-if="showEditBio" :show="showEditBio" :bio="user.bio" @close="showEditBio = false" />
                             </div>
                             <div v-else>
-                            <button @click="toggleBioModal" class="w-full bg-gray-200 hover:bg-gray-300 rounded-lg p-2 font-bold">
+                            <button @click="toggleAddBioModal" class="w-full bg-gray-200 hover:bg-gray-300 rounded-lg p-2 font-bold">
                                 Add bio
                             </button>
-                            <AddBio v-if="showBio" :show="showBio" @close="showBio = false"/>
+                            <AddBio v-if="showAddBio" :show="showAddBio" @close="showAddBio = false"/>
                             </div>
                         </div>
                         <div class="pb-5">
