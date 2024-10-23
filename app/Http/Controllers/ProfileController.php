@@ -83,4 +83,11 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+    public function addBio(Request $request): RedirectResponse
+    {
+        $user = Auth::user();
+        $user->bio = $request->bio;
+        $user->save();
+        return Redirect::route('user.show', ['user' => $user->username]);
+    }
 }

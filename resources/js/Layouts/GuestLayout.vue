@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/vue3';
 </script>
 
 <template>
-    <div class="h-[100vh] flex flex-col items-center pt-[100px] bg-gray-100">
+    <div class=" h-[100vh] flex flex-col items-center justify-center bg-gray-100">
         <Link :href="route('login')">
             <img width="200" src="/images/icons/FacebookLogo.png">
         </Link>
