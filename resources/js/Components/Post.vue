@@ -1,6 +1,6 @@
 <script setup>
 import { toRefs, reactive } from 'vue';
-import { Link, router } from '@inertiajs/vue3';
+import {Link, router, usePage} from '@inertiajs/vue3';
 
 import AccountMultiple from 'vue-material-design-icons/AccountMultiple.vue'
 import ThumbUp from 'vue-material-design-icons/ThumbUp.vue'
@@ -20,7 +20,7 @@ const props = defineProps({
     comments: Object,
 });
 
-const { post, user, comments } = toRefs(props)
+const { post, comments } = toRefs(props)
 
 const createComment = () => {
     router.post('/comment', {
@@ -47,6 +47,8 @@ const deletePost = (id) => {
 const isUser = () => {
     router.get('/user/' + user.value.id)
 }
+const user = usePage().props.auth.user
+
 </script>
 
 <template>
@@ -57,7 +59,9 @@ const isUser = () => {
             </button>
             <div class="flex items-center justify-between p-2 rounded-full w-full">
                 <div>
+                    <Link :href="route('user.show', { user: user.username })" class="mr-2">
                     <div class="font-extrabold text-[15px]">{{ user.name }}</div>
+                    </Link>
                     <div class="flex items-center text-xs text-gray-600">
                         {{ post.created_at }} <AccountMultiple class="ml-1" :size="15" fillColor="#64676B"/>
                     </div>

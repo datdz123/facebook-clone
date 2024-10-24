@@ -70,10 +70,10 @@ const user = usePage().props.auth.user
                         :image="user.image"
                         :placeholder="'What\'s on your mind ' + user.name "
                     />
-
                     <div v-for="post in posts.data" :key="post">
                         <Post :user="post.user" :post="post" :comments="post.comments" />
                     </div>
+
 
                 </div>
 
