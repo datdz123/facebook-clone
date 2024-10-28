@@ -1,5 +1,5 @@
 <script setup>
-import { toRefs, reactive } from 'vue';
+import { toRefs, reactive ,ref} from 'vue';
 import {Link, router, usePage} from '@inertiajs/vue3';
 
 import AccountMultiple from 'vue-material-design-icons/AccountMultiple.vue'
@@ -19,9 +19,14 @@ const props = defineProps({
     post: Object,
     comments: Object,
 });
-
 const { post, comments } = toRefs(props)
 
+const isAuthor=ref(props.user.id ===props.post.user_id)
+const confirmDelete = () => {
+    if (confirm('Are you sure you want to delete this post?')) {
+        deletePost(post.value.id)
+    }
+}
 const createComment = () => {
     router.post('/comment', {
         post_id: post.value.id,
@@ -37,7 +42,6 @@ const deleteComment = (id) => {
         preserveScroll: true
     })
 }
-
 const deletePost = (id) => {
     router.delete('/post/' + id, {
         preserveScroll: true
@@ -67,9 +71,11 @@ const user = usePage().props.auth.user
                     </div>
                 </div>
                 <div class="flex items-center">
-                    <button @click="deletePost(post.id)" class="rounded-full p-1.5 cursor-pointer hover:bg-[#F2F2F2]">
+                    <div v-if="isAuthor">
+                    <button @click="confirmDelete" class="rounded-full p-1.5 cursor-pointer hover:bg-[#F2F2F2]">
                         <Delete fillColor="#64676B"/>
                     </button>
+                    </div>
                 </div>
             </div>
         </div>
